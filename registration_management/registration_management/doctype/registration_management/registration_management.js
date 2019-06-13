@@ -3,7 +3,11 @@
 
 frappe.ui.form.on('Registration Management', {
 	refresh: function(frm) {
-		frm.doc.regFlag= 0;
+		console.log('.....................refresh.......................')
+	},
+	onload: function(frm) {
+		console.log('.....................onload.......................')
+		frm.set_value('regflag',0)
 	},
 	email:function(frm){
 
@@ -39,14 +43,28 @@ pincode:function(frm){
 }
 },
 validate:function(frm){
-	if(frm.doc.pswd==frm.doc.confirmpswd){
+	console.log('................regflag in console.......')
+	console.log(frm.doc.regflag);
+	if((frm.doc.pswd==frm.doc.confirmpswd)){
 		console.log('-------------------validate------------------------------');
 	}
 	else{
 		console.log('-------------------Else validate------------------------------');
 		frm.set_value('pswd', '');
 		frm.set_value('confirmpswd', '');
+		frm.set_value('regflag',0)
 	}
+	if(frm.doc.regflag){
+		console.log('Registered successfully')
+	}else{
+		console.log(frm.doc.regflag)
+		frappe.throw('User must be Registered first.');
+	}
+
+},
+after_save:function(frm){
+	console.log('**********************after save validation*************');
+	frm.set_value('regflag', 1);
 }
 
 

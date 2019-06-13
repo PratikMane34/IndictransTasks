@@ -8,12 +8,19 @@ from frappe.model.document import Document
 
 class RegistrationManagement(Document):
 	def sub_btn(self):
-		#print("Button is clicked and python file is working")
+		print('.....before......')
+		print(self.regflag)
+
+
+		print("Button is clicked and python file is working")
 		if (self.pswd==self.confirmpswd):
 			frappe.msgprint('Successfully Registered\nFor further process save this document.')
-			self.regFlag=1
+			self.regflag=1
+			print('.............after..............')
+			print(self.regflag)
 
 		else:
+			self.regflag=0
 			frappe.msgprint('Your password does not match ')
 
 	def cancel_btn(self):
@@ -32,6 +39,7 @@ class RegistrationManagement(Document):
 	def on_cancel(self):
 		sub="Registration is Canecelled"
 		msg="Hello User, your registration is cancelled. Please try again later."
+		self.regflag=0
 		status=self.send_email(self.email,sub,msg)
 		if(status==True):
 		  frappe.msgprint('Your registration is cancelled.')
@@ -43,7 +51,7 @@ class RegistrationManagement(Document):
 		#frappe.msgprint('Calling before save function')
 		if (self.pswd==self.confirmpswd):
 			frappe.msgprint('Successfully Registered\nFor further process save this document.')
-			self.regFlag=1
+			#self.regFlag=1
 
 		else:
 			frappe.msgprint('Your password does not match ')
@@ -58,3 +66,6 @@ class RegistrationManagement(Document):
 			return True
 		except:
 			return False
+
+	# def autoname(self):
+	# 	self.name = self.l_name + " - " + self.f_name
