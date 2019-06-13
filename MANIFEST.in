@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include registration_management *.css
+recursive-include registration_management *.csv
+recursive-include registration_management *.html
+recursive-include registration_management *.ico
+recursive-include registration_management *.js
+recursive-include registration_management *.json
+recursive-include registration_management *.md
+recursive-include registration_management *.png
+recursive-include registration_management *.py
+recursive-include registration_management *.svg
+recursive-include registration_management *.txt
+recursive-exclude registration_management *.pyc
