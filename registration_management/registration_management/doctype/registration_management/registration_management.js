@@ -66,14 +66,23 @@ after_save:function(frm){
 	console.log('**********************after save validation*************');
 	frm.set_value('regflag', 1);
 },
-frm.get_field("pin_zip").$input.on("keypress", function(event) {
-    console.log("==================pin",event);
-      if(event.keyCode < 48 || event.keyCode > 57)
-      {
-      return false;
-      }
-     	});
-
+onload_post_render: function(frm) {
+        console.log("onload_post_render called...................");
+        frm.get_field("mobile").$input.on("keypress", function(event) {
+        console.log("Success",event);
+        if(event.keyCode < 48 || event.keyCode > 57)
+        {
+        return false;
+        }
+        });
+// frm.get_field("pin_zip").$input.on("keypress", function(event) {
+//     console.log("==================pin",event);
+//       if(event.keyCode < 48 || event.keyCode > 57)
+//       {
+//       return false;
+//       }
+//      	});
+}
 
 
 });
