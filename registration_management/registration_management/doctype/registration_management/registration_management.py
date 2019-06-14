@@ -46,6 +46,9 @@ class RegistrationManagement(Document):
 		else:
 		  frappe.msgprint('Your registration is failed.')
 
+	def on_update(self):
+		print('--------------------On update call')
+		#code to save modified date and time in DB
 
 	def before_save(self):
 		#frappe.msgprint('Calling before save function')

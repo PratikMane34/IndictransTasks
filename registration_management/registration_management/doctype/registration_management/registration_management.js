@@ -13,7 +13,7 @@ frappe.ui.form.on('Registration Management', {
 
 		var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 					//	console.log(reg.test(frm.doc.email));
-            if (reg.test(frm.doc.email) == false)
+            if ((reg.test(frm.doc.email) == false)&&(frm.doc.pincode!=''))
             {
 							//frappe.throw('Hiiiiiiii');
 							frm.set_value('email', '');
@@ -24,7 +24,7 @@ frappe.ui.form.on('Registration Management', {
 	mobile:function(frm){
 		var phoneno = /^\d{10}$/;
 		console.log(phoneno.test(frm.doc.mobile));
-		if (phoneno.test(frm.doc.mobile) == false)
+		if ((phoneno.test(frm.doc.mobile) == false)&&(frm.doc.mobile!=''))
 		{
 			console.log("Condition is false");
 			frm.set_value('mobile', '');
@@ -36,7 +36,7 @@ frappe.ui.form.on('Registration Management', {
 pincode:function(frm){
 	var pin = /^\d{6}$/;
 	console.log(pin.test(frm.doc.pincode));
-	if (pin.test(frm.doc.pincode) == false)
+	if ((pin.test(frm.doc.pincode) == false)&&(frm.doc.pincode!=''))
 	{
 		frm.set_value('pincode', '');
 		frappe.throw('Invalid PinCode Number');
@@ -65,7 +65,14 @@ validate:function(frm){
 after_save:function(frm){
 	console.log('**********************after save validation*************');
 	frm.set_value('regflag', 1);
-}
+},
+frm.get_field("pin_zip").$input.on("keypress", function(event) {
+    console.log("==================pin",event);
+      if(event.keyCode < 48 || event.keyCode > 57)
+      {
+      return false;
+      }
+     	});
 
 
 
